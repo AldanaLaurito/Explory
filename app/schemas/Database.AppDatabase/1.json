@@ -2,27 +2,15 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "0f455650d873c9cd8b1ac75f95e8db34",
+    "identityHash": "0e835a52ea68bef12d66441bf14a9f12",
     "entities": [
       {
-        "ftsVersion": "FTS4",
-        "ftsOptions": {
-          "tokenizer": "simple",
-          "tokenizerArgs": [],
-          "contentTable": "",
-          "languageIdColumnName": "lid",
-          "matchInfo": "FTS4",
-          "notIndexedColumns": [],
-          "prefixSizes": [],
-          "preferredOrder": "ASC"
-        },
-        "contentSyncTriggers": [],
         "tableName": "Users",
-        "createSql": "CREATE VIRTUAL TABLE IF NOT EXISTS `${TABLE_NAME}` USING FTS4(`firstName` TEXT, `lastName` TEXT, `nickname` TEXT, `password` TEXT, `mail` TEXT, `birthdate` TEXT, `level` INTEGER NOT NULL, `points` INTEGER NOT NULL, `qrCode` TEXT, languageid=`lid`)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER NOT NULL, `firstName` TEXT, `lastName` TEXT, `nickname` TEXT, `password` TEXT, `mail` TEXT, `birthday` INTEGER, `level` INTEGER NOT NULL, `points` INTEGER NOT NULL, `qrCode` TEXT, PRIMARY KEY(`uid`))",
         "fields": [
           {
             "fieldPath": "id",
-            "columnName": "id",
+            "columnName": "uid",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -57,9 +45,9 @@
             "notNull": false
           },
           {
-            "fieldPath": "birthdate",
-            "columnName": "birthdate",
-            "affinity": "TEXT",
+            "fieldPath": "birthday",
+            "columnName": "birthday",
+            "affinity": "INTEGER",
             "notNull": false
           },
           {
@@ -83,9 +71,9 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "id"
+            "uid"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
@@ -94,7 +82,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0f455650d873c9cd8b1ac75f95e8db34')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0e835a52ea68bef12d66441bf14a9f12')"
     ]
   }
 }

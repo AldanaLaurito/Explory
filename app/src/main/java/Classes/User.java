@@ -2,17 +2,16 @@ package Classes;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Fts4;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
-@Fts4(languageId = "lid")
+//@Fts4(languageId = "id")
 @Entity(tableName = "Users")
 public class User {
 
     @PrimaryKey
-    @ColumnInfo(name = "rowid")
+    @ColumnInfo(name = "uid")
     private int id;
 
     @ColumnInfo(name = "firstName")
@@ -27,7 +26,7 @@ public class User {
 
     private String mail;
 
-    private Date birthdate;
+    private Date birthday;
 
     private int level;
 
@@ -42,7 +41,7 @@ public class User {
         this.nickname = nickname;
         this.password = password;
         this.mail = mail;
-        this.birthdate = birthdate;
+        this.birthday = birthdate;
     }
 
     public User() {
@@ -96,12 +95,12 @@ public class User {
         this.mail = mail;
     }
 
-    public Date getBirthdate() {
-        return birthdate;
+    public Date getBirthday() {
+        return birthday;
     }
 
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
     public int getLevel() {

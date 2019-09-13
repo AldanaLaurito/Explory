@@ -12,8 +12,8 @@ public interface CollectorAlbumDao {
     @Query("SELECT * FROM Collector_Albums")
     List<CollectorAlbum> getAll();
 
-    @Query("SELECT * FROM Collector_Albums WHERE caid IN (:cardIds)")
-    List<CollectorAlbum> loadAllByIds(int[] cardIds);
+    @Query("SELECT * FROM Collector_Albums WHERE caid IN (:caIds)")
+    List<CollectorAlbum> loadAllByIds(int[] caIds);
 
     @Query("SELECT * FROM Collector_Albums WHERE name LIKE :name" +
             " LIMIT 1")

@@ -21,6 +21,14 @@ public interface UserDao {
             "lastName LIKE :last LIMIT 1")
     User findByName(String first, String last);
 
+    @Query("SELECT * FROM Users WHERE nickname LIKE :nick " +
+            "LIMIT 1")
+    User findByNickname(String nick);
+
+    @Query("SELECT * FROM Users WHERE mail LIKE :mail " +
+            "LIMIT 1")
+    User findByMail(String mail);
+
     @Insert
     void insertAll(User... users);
 

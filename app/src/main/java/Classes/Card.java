@@ -4,18 +4,18 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Card")
+@Entity(tableName = "Cards")
 public class Card {
 
     @PrimaryKey
-    @ColumnInfo(name = "rowid")
+    @ColumnInfo(name = "cid")
     private int id;
 
     private int idAlbum;
 
     private String qrCode;
 
-    private String image;
+    private String name;
 
     private String description;
 
@@ -25,7 +25,7 @@ public class Card {
     public Card(int idAlbum, String qrCode, String image, String description, String link) {
         this.idAlbum = idAlbum;
         this.qrCode = qrCode;
-        this.image = image;
+        this.name = image;
         this.description = description;
         this.link = link;
     }
@@ -57,12 +57,12 @@ public class Card {
         this.qrCode = qrCode;
     }
 
-    public String getImage() {
-        return image;
+    public String getName() {
+        return name;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {

@@ -8,7 +8,7 @@ import java.util.*;
 @Entity(tableName = "User_Contacts")
 public class UserContacts {
     @PrimaryKey
-    @ColumnInfo(name = "rowid")
+    @ColumnInfo(name = "usContid")
     private int id;
 
     private int idUser1;

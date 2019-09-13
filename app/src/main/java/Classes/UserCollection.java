@@ -4,11 +4,11 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "User_Collection")
+@Entity(tableName = "User_Collections")
 public class UserCollection {
 
     @PrimaryKey
-    @ColumnInfo(name = "rowid")
+    @ColumnInfo(name = "ucid")
     private int id;
 
     private int idUser;

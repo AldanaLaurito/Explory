@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 public class UserFriends {
 
     @PrimaryKey
-    @ColumnInfo(name = "rowid")
+    @ColumnInfo(name = "ufid")
     private int id;
 
     private int idUser1;

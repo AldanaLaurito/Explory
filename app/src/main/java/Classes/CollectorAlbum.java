@@ -4,14 +4,14 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Collector_Album")
+@Entity(tableName = "Collector_Albums")
 public class CollectorAlbum {
 
     @PrimaryKey
-    @ColumnInfo(name = "rowid")
+    @ColumnInfo(name = "caid")
     private int id;
 
-    private String image;
+    private String name;
 
     private String imageInactive;
 
@@ -21,7 +21,7 @@ public class CollectorAlbum {
     }
 
     public CollectorAlbum(String image, String imageInactive, String imageCompleted) {
-        this.image = image;
+        this.name = image;
         this.imageInactive = imageInactive;
         this.imageCompleted = imageCompleted;
     }
@@ -34,12 +34,12 @@ public class CollectorAlbum {
         this.id = id;
     }
 
-    public String getImage() {
-        return image;
+    public String getName() {
+        return name;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getImageInactive() {

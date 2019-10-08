@@ -1,11 +1,11 @@
-package com.example.qrscanner.ui.login;
+package com.example.figur.ui.login;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.annotation.NonNull;
 
-import com.example.qrscanner.data.LoginDataSource;
-import com.example.qrscanner.data.LoginRepository;
+import com.example.figur.data.LoginDataSource;
+import com.example.figur.data.LoginRepository;
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.

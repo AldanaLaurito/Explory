@@ -1,6 +1,6 @@
-package com.example.qrscanner.data;
+package com.example.figur.data;
 
-import com.example.qrscanner.data.model.LoggedInUser;
+import com.example.figur.data.model.LoggedInUser;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package com.example.qrscanner.ui.login;
+package com.example.figur.ui.login;
 
 import androidx.annotation.Nullable;
 

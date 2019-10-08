@@ -1,4 +1,4 @@
-package com.example.qrscanner.ui.login;
+package com.example.figur.ui.login;
 
 /**
  * Class exposing authenticated user details to the UI.

@@ -1,6 +1,6 @@
-package com.example.qrscanner.data;
+package com.example.figur.data;
 
-import com.example.qrscanner.data.model.LoggedInUser;
+import com.example.figur.data.model.LoggedInUser;
 
 /**
  * Class that requests authentication and user information from the remote data source and

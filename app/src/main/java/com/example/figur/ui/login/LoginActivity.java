@@ -5,6 +5,7 @@ import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -22,13 +23,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.example.figur.ui.login.LoginViewModel;
 import com.example.figur.ui.login.LoginViewModelFactory;
-
 import com.example.figur.MainActivity;
 import com.example.figur.R;
-
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -71,14 +69,23 @@ public class LoginActivity extends AppCompatActivity {
                 loadingProgressBar.setVisibility(View.GONE);
                 if (loginResult.getError() != null) {
                     showLoginFailed(loginResult.getError());
+                    setResult(Activity.RESULT_OK);
+                    finish();
                 }
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
+                    setResult(Activity.RESULT_OK);
+                    Intent mainActivity = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(mainActivity);
+                    finish();
+                }else{
+                    setResult(Activity.RESULT_OK);
+                    finish();
                 }
-                setResult(Activity.RESULT_OK);
+                //setResult(Activity.RESULT_OK);
 
                 //Complete and destroy login activity once successful
-                finish();
+                //finish();
             }
         });
 

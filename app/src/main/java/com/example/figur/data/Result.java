@@ -1,4 +1,4 @@
-package com.example.qrscanner.data;
+package com.example.figur.data;
 
 /**
  * A generic class that holds a result success w/ data or an error exception.

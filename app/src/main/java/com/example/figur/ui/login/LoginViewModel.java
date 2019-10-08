@@ -1,4 +1,4 @@
-package com.example.qrscanner.ui.login;
+package com.example.figur.ui.login;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel;
 
 import android.util.Patterns;
 
-import com.example.qrscanner.data.LoginRepository;
-import com.example.qrscanner.data.Result;
-import com.example.qrscanner.data.model.LoggedInUser;
-import com.example.qrscanner.R;
+import com.example.figur.data.LoginRepository;
+import com.example.figur.data.Result;
+import com.example.figur.data.model.LoggedInUser;
+import com.example.figur.R;
 
 public class LoginViewModel extends ViewModel {
 

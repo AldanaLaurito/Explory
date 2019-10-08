@@ -1,4 +1,4 @@
-package com.example.qrscanner.ui.login;
+package com.example.figur.ui.login;
 
 import android.app.Activity;
 
@@ -22,9 +22,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.qrscanner.R;
-import com.example.qrscanner.ui.login.LoginViewModel;
-import com.example.qrscanner.ui.login.LoginViewModelFactory;
+
+import com.example.figur.ui.login.LoginViewModel;
+import com.example.figur.ui.login.LoginViewModelFactory;
+
+import com.example.figur.MainActivity;
+import com.example.figur.R;
+
 
 public class LoginActivity extends AppCompatActivity {
 

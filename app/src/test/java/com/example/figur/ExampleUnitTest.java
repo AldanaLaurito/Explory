@@ -1,4 +1,4 @@
-package com.example.qrscanner;
+package com.example.figur;
 
 import org.junit.Test;
 

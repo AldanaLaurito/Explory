@@ -23,15 +23,11 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="2b301f19-5b1a-41c2-81d8-6e3cafae1197">
-        <schema name="figur" object-types="procedure, table, view, function" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="2b301f19-5b1a-41c2-81d8-6e3cafae1197">
-      <console name="Figur" type="STANDARD" schema="figur" session="Main" />
+      <console name="Figur" type="STANDARD" schema="" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

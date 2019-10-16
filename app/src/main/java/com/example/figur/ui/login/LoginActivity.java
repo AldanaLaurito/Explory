@@ -1,38 +1,27 @@
 package com.example.figur.ui.login;
 
-import android.app.Activity;
-
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.figur.ui.login.LoginViewModel;
-import com.example.figur.ui.login.LoginViewModelFactory;
-import com.example.figur.MainActivity;
+import com.example.figur.LoginRegister.LoginFragment;
+import com.example.figur.LoginRegister.RegisterFragment;
 import com.example.figur.R;
+
+import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
 
-    @Override
+    /*@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -128,6 +117,19 @@ public class LoginActivity extends AppCompatActivity {
                         passwordEditText.getText().toString());
             }
         });
+    }*/
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.login);
+
+        ViewPager viewPager = findViewById(R.id.viewPager);
+
+        AuthenticationPagerAdapter pagerAdapter = new AuthenticationPagerAdapter(getSupportFragmentManager());
+        pagerAdapter.addFragmet(new LoginFragment());
+        pagerAdapter.addFragmet(new RegisterFragment());
+        viewPager.setAdapter(pagerAdapter);
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
@@ -138,5 +140,27 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+}
+
+class AuthenticationPagerAdapter extends FragmentPagerAdapter {
+    private ArrayList<Fragment> fragmentList = new ArrayList<>();
+
+    public AuthenticationPagerAdapter(FragmentManager fm) {
+        super(fm);
+    }
+
+    @Override
+    public Fragment getItem(int i) {
+        return fragmentList.get(i);
+    }
+
+    @Override
+    public int getCount() {
+        return fragmentList.size();
+    }
+
+    void addFragmet(Fragment fragment) {
+        fragmentList.add(fragment);
     }
 }

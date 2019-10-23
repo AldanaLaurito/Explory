@@ -1,31 +1,31 @@
-package com.example.figur.ui.login;
+package com.example.figur.ui.register;
 
 import androidx.annotation.Nullable;
 
 /**
  * Authentication result : success (user details) or error message.
  */
-public class LoginResult {
+class RegisterResult {
     @Nullable
-    private LoggedInUserView success;
+    private RegisterUserView success;
     @Nullable
     private Integer error;
 
-    LoginResult(@Nullable Integer error) {
+    RegisterResult(@Nullable Integer error) {
         this.error = error;
     }
 
-    LoginResult(@Nullable LoggedInUserView success) {
+    RegisterResult(@Nullable RegisterUserView success) {
         this.success = success;
     }
 
     @Nullable
-    public LoggedInUserView getSuccess() {
+    RegisterUserView getSuccess() {
         return success;
     }
 
     @Nullable
-    public Integer getError() {
+    Integer getError() {
         return error;
     }
 }

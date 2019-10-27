@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.figur.R;
 import com.example.figur.data.LoginRepository;
+import com.example.figur.data.RegisterRepository;
 import com.example.figur.data.Result;
 import com.example.figur.data.model.LoggedInUser;
 
@@ -15,9 +16,9 @@ public class RegisterViewModel extends ViewModel {
 
     private MutableLiveData<RegisterFormState> registerFormState = new MutableLiveData<>();
     private MutableLiveData<RegisterResult> registerResult = new MutableLiveData<>();
-    private LoginRepository registerRepository;
+    private RegisterRepository registerRepository;
 
-    RegisterViewModel(LoginRepository registerRepository) {
+    RegisterViewModel(RegisterRepository registerRepository) {
         this.registerRepository = registerRepository;
     }
 
@@ -41,7 +42,7 @@ public class RegisterViewModel extends ViewModel {
         }
     }*/
 
-    public void loginDataChanged(String username, String password) {
+    public void registerDataChanged(String username, String password) {
         if (!isUserNameValid(username)) {
             registerFormState.setValue(new RegisterFormState(R.string.invalid_username, null));
         } else if (!isPasswordValid(password)) {

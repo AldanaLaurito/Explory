@@ -3,7 +3,9 @@ package com.example.figur;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -33,6 +35,15 @@ public class RegisterActivity extends AppCompatActivity {
         final Button registerButton = findViewById(R.id.btn_register);
         final Button loginButton = findViewById(R.id.btn_login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent loginActivity = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(loginActivity);
+                finish();
+            }
+        });
 
     }
 }

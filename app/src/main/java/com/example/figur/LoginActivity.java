@@ -130,6 +130,15 @@ public class LoginActivity extends AppCompatActivity {
                         passwordEditText.getText().toString());
             }
         });
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent registerActivity = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(registerActivity);
+                finish();
+            }
+        });
     }
 
     private void updateUiWithUser(LoggedInUserView model) {

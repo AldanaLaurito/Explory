@@ -27,7 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerViewModel = ViewModelProviders.of(this, new RegisterViewModelFactory())
                 .get(RegisterViewModel.class);
 
-        final EditText usernameEditText = findViewById(R.id.et_name);
+        final EditText emailEditText = findViewById(R.id.et_email);
         final EditText passwordEditText = findViewById(R.id.et_password);
 
         final Button registerButton = findViewById(R.id.btn_register);

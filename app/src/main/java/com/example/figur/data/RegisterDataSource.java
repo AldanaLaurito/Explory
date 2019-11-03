@@ -9,7 +9,7 @@ import java.io.IOException;
  */
 public class RegisterDataSource {
 
-    public Result<LoggedInUser> login(String username, String password) {
+    public Result<LoggedInUser> register(String username, String password) {
 
         try {
             // TODO: handle loggedInUser authentication
@@ -19,11 +19,7 @@ public class RegisterDataSource {
                             "Jane Doe");
             return new Result.Success<>(fakeUser);
         } catch (Exception e) {
-            return new Result.Error(new IOException("Error logging in", e));
+            return new Result.Error(new IOException("Error registering", e));
         }
-    }
-
-    public void logout() {
-        // TODO: revoke authentication
     }
 }

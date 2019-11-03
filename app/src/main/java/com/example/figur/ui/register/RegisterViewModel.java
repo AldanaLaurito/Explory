@@ -22,7 +22,7 @@ public class RegisterViewModel extends ViewModel {
         this.registerRepository = registerRepository;
     }
 
-    LiveData<RegisterFormState> getRegisterFormState() {
+    public LiveData<RegisterFormState> getRegisterFormState() {
         return registerFormState;
     }
 
@@ -30,17 +30,16 @@ public class RegisterViewModel extends ViewModel {
         return registerResult;
     }
 
-    /*public void login(String username, String password) {
+    public void register(String username, String password) {
         // can be launched in a separate asynchronous job
         Result<LoggedInUser> result = registerRepository.login(username, password);
 
         if (result instanceof Result.Success) {
-            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-            registerResult.setValue(new RegisterResult(new RegisterUserView(data.getDisplayName())));
+            registerResult.setValue(new RegisterResult(R.string.register_succeed));
         } else {
-            registerResult.setValue(new RegisterResult(R.string.login_failed));
+            registerResult.setValue(new RegisterResult(R.string.register_failed));
         }
-    }*/
+    }
 
     public void registerDataChanged(String username, String password) {
         if (!isUserNameValid(username)) {
@@ -54,13 +53,13 @@ public class RegisterViewModel extends ViewModel {
 
     // A placeholder username validation check
     private boolean isUserNameValid(String username) {
-        if (username == null) {
+        if (username == null || username.trim().isEmpty()) {
             return false;
         }
         if (username.contains("@")) {
             return Patterns.EMAIL_ADDRESS.matcher(username).matches();
         } else {
-            return !username.trim().isEmpty();
+            return false;
         }
     }
 

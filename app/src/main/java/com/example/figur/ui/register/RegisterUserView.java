@@ -1,17 +1,17 @@
-package com.example.figur.ui.login;
+package com.example.figur.ui.register;
 
 /**
  * Class exposing authenticated user details to the UI.
  */
-public class LoggedInUserView {
+class RegisterUserView {
     private String displayName;
     //... other data fields that may be accessible to the UI
 
-    LoggedInUserView(String displayName) {
+    RegisterUserView(String displayName) {
         this.displayName = displayName;
     }
 
-    public String getDisplayName() {
+    String getDisplayName() {
         return displayName;
     }
 }

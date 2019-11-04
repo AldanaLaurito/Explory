@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "0e835a52ea68bef12d66441bf14a9f12",
+    "identityHash": "85f4e07d6564070dfe0d3e3e8a7bef3b",
     "entities": [
       {
         "tableName": "Users",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER NOT NULL, `firstName` TEXT, `lastName` TEXT, `nickname` TEXT, `password` TEXT, `mail` TEXT, `birthday` INTEGER, `level` INTEGER NOT NULL, `points` INTEGER NOT NULL, `qrCode` TEXT, PRIMARY KEY(`uid`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER NOT NULL, `firstName` TEXT, `lastName` TEXT, `nickname` TEXT, `password` TEXT NOT NULL, `mail` TEXT NOT NULL, `birthday` INTEGER, `level` INTEGER NOT NULL, `points` INTEGER NOT NULL, `qrCode` TEXT, PRIMARY KEY(`uid`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -36,13 +36,13 @@
             "fieldPath": "password",
             "columnName": "password",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "mail",
             "columnName": "mail",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "birthday",
@@ -82,7 +82,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0e835a52ea68bef12d66441bf14a9f12')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '85f4e07d6564070dfe0d3e3e8a7bef3b')"
     ]
   }
 }

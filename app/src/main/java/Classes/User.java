@@ -1,5 +1,6 @@
 package Classes;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -14,16 +15,16 @@ public class User {
     @ColumnInfo(name = "uid")
     private int id;
 
-    @ColumnInfo(name = "firstName")
     private String firstName;
 
-    @ColumnInfo(name = "lastName")
     private String lastName;
 
     private String nickname;
 
+    @NonNull
     private String password;
 
+    @NonNull
     private String mail;
 
     private Date birthday;
@@ -42,6 +43,11 @@ public class User {
         this.password = password;
         this.mail = mail;
         this.birthday = birthdate;
+    }
+
+    public User(String mail, String password) {
+        this.password = password;
+        this.mail = mail;
     }
 
     public User() {

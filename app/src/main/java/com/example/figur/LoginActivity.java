@@ -7,8 +7,14 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.room.Dao;
+import androidx.room.RawQuery;
+import androidx.room.Room;
+import androidx.sqlite.db.SimpleSQLiteQuery;
+import androidx.sqlite.db.SupportSQLiteQuery;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -28,7 +34,29 @@ import com.example.figur.ui.login.LoginViewModel;
 import com.example.figur.ui.login.LoginViewModelFactory;
 import com.example.figur.ui.register.RegisterFormState;
 
+import java.util.List;
+
+import Classes.User;
+import Classes.UserDao;
+import Database.AppDatabase;
+
+import static java.util.Objects.isNull;
+
 public class LoginActivity extends AppCompatActivity {
+
+    private AppDatabase db;
+
+    public void initializeDatabase(){
+        //Instance of the initializeDatabase
+        db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "figur.db").allowMainThreadQueries().build();
+    }
+
+    public AppDatabase getDb(){
+        return this.db;
+    }
+
+
 
     private LoginViewModel loginViewModel;
 
@@ -44,6 +72,15 @@ public class LoginActivity extends AppCompatActivity {
         final Button loginButton = findViewById(R.id.btn_login);
         final Button registerButton = findViewById(R.id.btn_register);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+
+        initializeDatabase();
+        UserDao userDao = getDb().userDao();
+        if(isNull(userDao.findByMail("An@gmail.com"))){
+            userDao.insertAll(new User("An@gmail.com","123456"));
+        }
+        List<User> users = userDao.getAll();
+        users.get(0);
+
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -90,6 +127,8 @@ public class LoginActivity extends AppCompatActivity {
                 //finish();
             }
         });
+
+
 
         TextWatcher afterTextChangedListener = new TextWatcher() {
             @Override

@@ -12,10 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+
+import Database.AppDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,13 +33,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*private void database(){
-
-        //Instance of the database
-        AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "database-name").build();
-    }*/
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -50,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             and write that data to the TextView.
         */
         Button btn = (Button) findViewById(R.id.button);
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

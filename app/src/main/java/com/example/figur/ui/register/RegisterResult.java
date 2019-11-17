@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 /**
  * Authentication result : success (user details) or error message.
  */
-class RegisterResult {
+public class RegisterResult {
     @Nullable
     private RegisterUserView success;
     @Nullable
@@ -20,12 +20,12 @@ class RegisterResult {
     }
 
     @Nullable
-    RegisterUserView getSuccess() {
+    public RegisterUserView getSuccess() {
         return success;
     }
 
     @Nullable
-    Integer getError() {
+    public Integer getError() {
         return error;
     }
 }

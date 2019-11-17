@@ -14,7 +14,7 @@ public class RegisterRepository {
 
     // If user credentials will be cached in local storage, it is recommended it be encrypted
     // @see https://developer.android.com/training/articles/keystore
-    private LoggedInUser user = null;
+    //private LoggedInUser user = null;
 
     // private constructor : singleton access
     private RegisterRepository(RegisterDataSource dataSource) {
@@ -27,6 +27,7 @@ public class RegisterRepository {
         }
         return instance;
     }
+    /*
     public Result<LoggedInUser> login(String username, String password) {
         // handle login
         Result<LoggedInUser> result = dataSource.register(username, password);
@@ -40,5 +41,5 @@ public class RegisterRepository {
         this.user = user;
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
-    }
+    }*/
 }

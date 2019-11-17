@@ -2,12 +2,14 @@ package Classes;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "User_Friends")
+@Entity(tableName = "User_Friends", indices = {@Index(value = {"ufid"},
+        unique = true)})
 public class UserFriends {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "ufid")
     private int id;
 

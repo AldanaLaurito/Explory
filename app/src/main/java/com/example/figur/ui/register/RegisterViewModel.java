@@ -26,11 +26,11 @@ public class RegisterViewModel extends ViewModel {
         return registerFormState;
     }
 
-    LiveData<RegisterResult> getRegisterResult() {
+    public LiveData<RegisterResult> getRegisterResult() {
         return registerResult;
     }
 
-    public void register(String username, String password) {
+    /*public void register(String username, String password) {
         // can be launched in a separate asynchronous job
         Result<LoggedInUser> result = registerRepository.login(username, password);
 
@@ -39,7 +39,7 @@ public class RegisterViewModel extends ViewModel {
         } else {
             registerResult.setValue(new RegisterResult(R.string.register_failed));
         }
-    }
+    }*/
 
     public void registerDataChanged(String username, String password) {
         if (!isUserNameValid(username)) {

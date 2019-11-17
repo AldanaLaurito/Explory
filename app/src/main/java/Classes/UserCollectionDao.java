@@ -1,5 +1,6 @@
 package Classes;
 
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -7,26 +8,33 @@ import androidx.room.Query;
 
 import java.util.List;
 
+@Dao
 public interface UserCollectionDao {
-    @Query("SELECT * FROM User_Collections")
+    @Query("SELECT * FROM user_collections")
     List<UserCollection> getAll();
 
-    @Query("SELECT * FROM User_Collections WHERE ucid IN (:ucIds)")
-    List<UserCollection> loadAllByIds(int[] ucIds);
-
-    @Query("SELECT * FROM User_Collections WHERE ucid LIKE :ucId" +
+    @Query("SELECT * FROM user_collections WHERE idUser LIKE :idUser" +
             " LIMIT 1")
-    UserCollection findById(int ucId);
+    UserCollection findByUserId(int idUser);
 
-    @Insert
-    void insertAll(UserCollection... ucs);
+    @Query("SELECT * FROM user_collections WHERE idCard LIKE :idCard" +
+            " LIMIT 1")
+    UserCollection findByCardId(int idCard);
+
+    @Query("SELECT users.* FROM users INNER JOIN user_collections ON "+
+            "users.uid=user_collections.idUser WHERE "+
+            "user_collections.idCard=:idCard")
+            List<User> getUsersForCard(final int idCard);
+
+    @Query("SELECT cards.* FROM cards INNER JOIN user_collections ON "+
+            "cards.cid=user_collections.idCard WHERE "+
+            "user_collections.idUser=:idUser")
+            List<Card> getCardsForUser(final int idUser);
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    public void insertAll(UserCollection... ucs);
 
     @Delete
     void delete(UserCollection uc);
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void insertUsers(UserCollection... ucs);
-
-    @Insert
-    public void insertBothUsers(UserCollection uc1, UserCollection uc2);
 }

@@ -22,6 +22,18 @@ import Database.AppDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
+    private AppDatabase db;
+
+    public void initializeDatabase(){
+        //Instance of the initializeDatabase
+        db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "figur.db").allowMainThreadQueries().build();
+    }
+
+    public AppDatabase getDb(){
+        return this.db;
+    }
+
     /** Check if this device has a camera */
     private boolean checkCameraHardware(Context context) {
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){

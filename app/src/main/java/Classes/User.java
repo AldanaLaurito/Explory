@@ -3,15 +3,17 @@ package Classes;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
 //@Fts4(languageId = "id")
-@Entity(tableName = "Users")
+@Entity(tableName = "users",indices = {@Index(value = {"uid","mail"},
+        unique = true)})
 public class User {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "uid")
     private int id;
 
@@ -20,6 +22,8 @@ public class User {
     private String lastName;
 
     private String nickname;
+
+    private String userType;
 
     @NonNull
     private String password;
@@ -36,13 +40,14 @@ public class User {
     private String qrCode;
 
 
-    public User(String firstName, String lastName, String nickname, String password, String mail, Date birthdate) {
+    public User(String firstName, String lastName, String nickname, String password, String mail, Date birthdate, String userType) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nickname = nickname;
         this.password = password;
         this.mail = mail;
         this.birthday = birthdate;
+        this.userType = userType;
     }
 
     public User(String mail, String password) {
@@ -51,6 +56,14 @@ public class User {
     }
 
     public User() {
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     public int getId() {

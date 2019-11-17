@@ -2,12 +2,14 @@ package Classes;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Collector_Albums")
+@Entity(tableName = "collector_albums", indices = {@Index(value = {"caid","name"},
+        unique = true)})
 public class CollectorAlbum {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "caid")
     private int id;
 

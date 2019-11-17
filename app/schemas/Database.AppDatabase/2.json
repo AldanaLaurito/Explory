@@ -1,0 +1,283 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "3f0f137a66de182799d3f285f7c66d05",
+    "entities": [
+      {
+        "tableName": "users",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `firstName` TEXT, `lastName` TEXT, `nickname` TEXT, `userType` TEXT, `password` TEXT NOT NULL, `mail` TEXT NOT NULL, `birthday` INTEGER, `level` INTEGER NOT NULL, `points` INTEGER NOT NULL, `qrCode` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "uid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "firstName",
+            "columnName": "firstName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lastName",
+            "columnName": "lastName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "nickname",
+            "columnName": "nickname",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "userType",
+            "columnName": "userType",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "password",
+            "columnName": "password",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mail",
+            "columnName": "mail",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "birthday",
+            "columnName": "birthday",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "level",
+            "columnName": "level",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "points",
+            "columnName": "points",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "qrCode",
+            "columnName": "qrCode",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "uid"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_users_uid_mail",
+            "unique": true,
+            "columnNames": [
+              "uid",
+              "mail"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_users_uid_mail` ON `${TABLE_NAME}` (`uid`, `mail`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "cards",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`cid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `idAlbum` INTEGER NOT NULL, `qrCode` TEXT, `name` TEXT, `description` TEXT, `link` TEXT, FOREIGN KEY(`idAlbum`) REFERENCES `collector_albums`(`caid`) ON UPDATE NO ACTION ON DELETE SET NULL )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "cid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idAlbum",
+            "columnName": "idAlbum",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "qrCode",
+            "columnName": "qrCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "link",
+            "columnName": "link",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "cid"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_cards_cid",
+            "unique": true,
+            "columnNames": [
+              "cid"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_cards_cid` ON `${TABLE_NAME}` (`cid`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "collector_albums",
+            "onDelete": "SET NULL",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idAlbum"
+            ],
+            "referencedColumns": [
+              "caid"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "user_collections",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idUser` INTEGER NOT NULL, `idCard` INTEGER NOT NULL, PRIMARY KEY(`idUser`, `idCard`), FOREIGN KEY(`idUser`) REFERENCES `users`(`uid`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`idCard`) REFERENCES `cards`(`cid`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "idUser",
+            "columnName": "idUser",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idCard",
+            "columnName": "idCard",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idUser",
+            "idCard"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_user_collections_idUser_idCard",
+            "unique": false,
+            "columnNames": [
+              "idUser",
+              "idCard"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_user_collections_idUser_idCard` ON `${TABLE_NAME}` (`idUser`, `idCard`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "users",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idUser"
+            ],
+            "referencedColumns": [
+              "uid"
+            ]
+          },
+          {
+            "table": "cards",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idCard"
+            ],
+            "referencedColumns": [
+              "cid"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "collector_albums",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`caid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `imageInactive` TEXT, `imageCompleted` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "caid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "imageInactive",
+            "columnName": "imageInactive",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "imageCompleted",
+            "columnName": "imageCompleted",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "caid"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_collector_albums_caid_name",
+            "unique": true,
+            "columnNames": [
+              "caid",
+              "name"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_collector_albums_caid_name` ON `${TABLE_NAME}` (`caid`, `name`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3f0f137a66de182799d3f285f7c66d05')"
+    ]
+  }
+}

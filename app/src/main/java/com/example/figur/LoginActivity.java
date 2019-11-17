@@ -7,14 +7,9 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.room.Dao;
-import androidx.room.RawQuery;
 import androidx.room.Room;
-import androidx.sqlite.db.SimpleSQLiteQuery;
-import androidx.sqlite.db.SupportSQLiteQuery;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -34,9 +29,6 @@ import com.example.figur.ui.login.LoginViewModel;
 import com.example.figur.ui.login.LoginViewModelFactory;
 import com.example.figur.ui.register.RegisterFormState;
 
-import java.util.List;
-
-import Classes.User;
 import Classes.UserDao;
 import Database.AppDatabase;
 
@@ -50,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         //Instance of the initializeDatabase
         db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "figur.db").allowMainThreadQueries().build();
-    }
+}
 
     public AppDatabase getDb(){
         return this.db;
@@ -74,13 +66,8 @@ public class LoginActivity extends AppCompatActivity {
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
 
         initializeDatabase();
+        initializeDatabase();
         UserDao userDao = getDb().userDao();
-        if(isNull(userDao.findByMail("An@gmail.com"))){
-            userDao.insertAll(new User("An@gmail.com","123456"));
-        }
-        List<User> users = userDao.getAll();
-        users.get(0);
-
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -111,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                     setResult(Activity.RESULT_OK);
                     finish();
                 }
-                if (loginResult.getSuccess() != null) {
+                if ((loginResult.getSuccess() != null) && (loginValidation(loginViewModel.getLoginFormState().getValue(), emailEditText, passwordEditText, userDao))) {
                     updateUiWithUser(loginResult.getSuccess());
                     setResult(Activity.RESULT_OK);
                     Intent mainActivity = new Intent(LoginActivity.this, MainActivity.class);
@@ -178,6 +165,30 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private boolean loginValidation(LoginFormState loginFormState, EditText emailEditText, EditText passwordEditText, UserDao userDao){
+        if (loginFormState.getUsernameError() != null) {
+            return false;
+        }else if (loginFormState.getPasswordError() != null) {
+            return false;
+        }
+
+        if(isNull(userDao.findByMail(emailEditText.getText().toString()))){
+            showLoginMessage("There is no user with the email "+ emailEditText.getText().toString() +" .");
+            return false;
+        }else{
+            if(!userDao.findByMail(emailEditText.getText().toString()).getPassword().matches(passwordEditText.getText().toString())){
+                showLoginMessage("The password is incorrect.");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private void showLoginMessage(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     private void updateUiWithUser(LoggedInUserView model) {

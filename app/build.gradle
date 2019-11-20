@@ -69,4 +69,6 @@ dependencies {
 
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

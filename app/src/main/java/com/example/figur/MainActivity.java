@@ -17,11 +17,16 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import com.example.figur.data.model.LoggedInUser;
 import com.example.figur.ui.ImageAdapter;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
+import java.util.List;
+
+import Classes.Card;
+import Classes.User;
 import Database.AppDatabase;
 
 public class MainActivity extends AppCompatActivity {
@@ -54,21 +59,40 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        String userMail = getIntent().getStringExtra("userMail");
+
+        initializeDatabase();
+
+        User user = getDb().userDao().findByMail(userMail);
+
         //TODO
         //Image Grid View Example
-        final GridView gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new ImageAdapter(this));
+        final GridView gridview = findViewById(R.id.gridview);
+
+        ImageAdapter imageAdapter = new ImageAdapter(this);
+
+        if(user.getMail().matches("")){
+            //List<Card> cards = getDb().userCollectionDao().getCardsForUser(user.getId());
+            //if(!cards.isEmpty()) cards.forEach(card -> imageAdapter.setItem(card.getLink()));
+            imageAdapter.setItem("https://www.nationalgeographic.com.es/medio/2019/09/19/across-the-sky-of-history_82c9fd85_800x533.jpg");
+            imageAdapter.setItem("https://www.nationalgeographic.com.es/medio/2019/09/19/the-watcher_4c5b7692_540x351.jpg");
+            imageAdapter.setItem("https://www.nationalgeographic.com.es/medio/2019/09/19/galactic-lighthouse_ea927e18_1109x1200.jpg");
+            imageAdapter.setItem("https://www.nationalgeographic.com.es/medio/2019/09/19/flower-power_7da0a74e_1335x2000.jpg");
+            imageAdapter.setItem("https://www.nationalgeographic.com.es/medio/2019/10/31/montesfoja61_497b4943_800x800.jpg");
+        }
+
+        gridview.setAdapter(imageAdapter);
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Intent i = new Intent(getApplicationContext(), FullImageActivity.class);
                 i.putExtra("id", position);
                 startActivity(i);
             }
-
-
         });
 
         //TODO
+        //I commented the barcoder part
 
         //Wiring up the Button
         /*
@@ -76,13 +100,15 @@ public class MainActivity extends AppCompatActivity {
             When they do that, we want to load the bar code, process it for data,
             and write that data to the TextView.
         */
-        Button btn = (Button) findViewById(R.id.button);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        //TODO
+        //Button btn = (Button) findViewById(R.id.button);
+
+        /*btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             }
-        });
+        });*/
 
         //Load the Image
         /*
@@ -90,15 +116,19 @@ public class MainActivity extends AppCompatActivity {
          Then you use a BitMapFactory to decode the R.drawable.puppy resources into a Bitmap.
          Then you set it to be the bitmap for myImageView.
          */
-        ImageView myImageView = (ImageView) findViewById(R.id.imgview);
+
+        //TODO
+        /*ImageView myImageView = (ImageView) findViewById(R.id.imgview);
         Bitmap myBitmap = BitmapFactory.decodeResource(
                 getApplicationContext().getResources(),
                 R.drawable.puppy);
-        myImageView.setImageBitmap(myBitmap);
+        myImageView.setImageBitmap(myBitmap);*/
 
         //In the guide, this code was placed in the Decode the Barcode section,
         // but since txtView is also used in the Setup the Barcode Detector section I decided tu place it here.
-        TextView txtView = (TextView) findViewById(R.id.txtContent);
+
+        //TODO
+        //TextView txtView = (TextView) findViewById(R.id.txtContent);
 
 
         //Setup the Barcode Detector
@@ -108,6 +138,8 @@ public class MainActivity extends AppCompatActivity {
         (there are a lot of other barcode types we could also look for).
          */
 
+        //TODO
+        /*
         BarcodeDetector detector =
                 new BarcodeDetector.Builder(getApplicationContext())
                         .setBarcodeFormats(Barcode.DATA_MATRIX | Barcode.QR_CODE)
@@ -115,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         if(!detector.isOperational()){
             txtView.setText("Could not set up the detector!");
             return;
-        }
+        }*/
 
         //Detect the Barcode
         /*
@@ -123,8 +155,10 @@ public class MainActivity extends AppCompatActivity {
         This returns a SparseArray of barcodes.
         The API is capable of detecting multiple bar codes in the same frame.
          */
-        Frame frame = new Frame.Builder().setBitmap(myBitmap).build();
-        SparseArray<Barcode> barcodes = detector.detect(frame);
+
+        //TODO
+        //Frame frame = new Frame.Builder().setBitmap(myBitmap).build();
+        //SparseArray<Barcode> barcodes = detector.detect(frame);
 
         //Decode the Barcode
         /*
@@ -135,9 +169,12 @@ public class MainActivity extends AppCompatActivity {
         To do this, I take the Barcode called ‘thisCode' to be the first element in the array.
         I then assign it's rawValue to the textView
          */
-        Barcode thisCode = barcodes.valueAt(0);
+
+        //TODO
+        /*Barcode thisCode = barcodes.valueAt(0);
         //TextView txtView = (TextView) findViewById(R.id.txtContent);
         txtView.setText(thisCode.rawValue);
+        */
 
     }
 }

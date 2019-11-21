@@ -66,7 +66,6 @@ public class LoginActivity extends AppCompatActivity {
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
 
         initializeDatabase();
-        initializeDatabase();
         UserDao userDao = getDb().userDao();
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
@@ -102,16 +101,13 @@ public class LoginActivity extends AppCompatActivity {
                     updateUiWithUser(loginResult.getSuccess());
                     setResult(Activity.RESULT_OK);
                     Intent mainActivity = new Intent(LoginActivity.this, MainActivity.class);
+                    mainActivity.putExtra("userMail", emailEditText.getText().toString());
                     startActivity(mainActivity);
                     finish();
                 }else{
                     setResult(Activity.RESULT_OK);
                     finish();
                 }
-                //setResult(Activity.RESULT_OK);
-
-                //Complete and destroy login activity once successful
-                //finish();
             }
         });
 
@@ -192,7 +188,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
+        String welcome = getString(R.string.welcome) + model.getDisplayName() + "!";
         // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }

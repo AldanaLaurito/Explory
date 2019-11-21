@@ -29,7 +29,7 @@ public class FullImageActivity extends Activity {
         int position = i.getExtras().getInt("id");
         ImageAdapter imageAdapter = new ImageAdapter(this);
 
-        img = (ImageView) findViewById(R.id.image);
+        img = findViewById(R.id.image);
         String url = imageAdapter.getItem(position);
 
         new DownloadImage().execute(url);

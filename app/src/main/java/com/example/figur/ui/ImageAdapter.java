@@ -11,9 +11,14 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
     int imageTotal = 7;
+
+    private ArrayList<String> mThumbIds2 = new ArrayList<String>();
+
     public static String[] mThumbIds = {
             "https://www.nationalgeographic.com.es/medio/2019/09/19/across-the-sky-of-history_82c9fd85_800x533.jpg",
             "https://www.nationalgeographic.com.es/medio/2019/09/19/the-watcher_4c5b7692_540x351.jpg",
@@ -27,13 +32,17 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        return imageTotal;
+        return mThumbIds2.size();
+        //return imageTotal;
     }
 
     @Override
     public String getItem(int position) {
-        return mThumbIds[position];
+        //return mThumbIds[position];
+        return mThumbIds2.get(position);
     }
+
+    public void setItem(String url){mThumbIds2.add(url);}
 
     public long getItemId(int position) {
         return 0;

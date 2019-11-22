@@ -27,10 +27,17 @@ public class Card {
     private String link;
 
 
-    public Card(int idAlbum, String qrCode, String image, String description, String link) {
+    public Card(int idAlbum, String qrCode, String name, String description, String link) {
         this.idAlbum = idAlbum;
         this.qrCode = qrCode;
-        this.name = image;
+        this.name = name;
+        this.description = description;
+        this.link = link;
+    }
+
+    public Card(int idAlbum, String name, String description, String link) {
+        this.idAlbum = idAlbum;
+        this.name = name;
         this.description = description;
         this.link = link;
     }

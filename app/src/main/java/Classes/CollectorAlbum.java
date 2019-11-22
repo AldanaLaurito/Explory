@@ -22,8 +22,12 @@ public class CollectorAlbum {
     public CollectorAlbum() {
     }
 
-    public CollectorAlbum(String image, String imageInactive, String imageCompleted) {
-        this.name = image;
+    public CollectorAlbum(String name) {
+        this.name = name;
+    }
+
+    public CollectorAlbum(String name, String imageInactive, String imageCompleted) {
+        this.name = name;
         this.imageInactive = imageInactive;
         this.imageCompleted = imageCompleted;
     }

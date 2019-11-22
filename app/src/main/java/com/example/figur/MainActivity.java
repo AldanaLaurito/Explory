@@ -26,7 +26,9 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 import java.util.List;
 
 import Classes.Card;
+import Classes.CollectorAlbum;
 import Classes.User;
+import Classes.UserCollection;
 import Database.AppDatabase;
 
 public class MainActivity extends AppCompatActivity {
@@ -66,21 +68,31 @@ public class MainActivity extends AppCompatActivity {
 
         User user = getDb().userDao().findByMail(userMail);
 
+
+        CollectorAlbum album = new CollectorAlbum("National Geographic - Landscapes");
+        getDb().collectorAlbumDao().insertAll(album);
+        Card card1 = new Card(1,"acrossTheSkyNG","Across the sky of History - National Geographic","https://www.nationalgeographic.com.es/medio/2019/09/19/across-the-sky-of-history_82c9fd85_800x533.jpg");
+        Card card2 = new Card(1,"theWatcher","The Watcher - National Geographic","https://www.nationalgeographic.com.es/medio/2019/09/19/the-watcher_4c5b7692_540x351.jpg");
+        Card card3 = new Card(1,"galaticLightHouse","Galactic Lighthouse - National Geographic","https://www.nationalgeographic.com.es/medio/2019/09/19/galactic-lighthouse_ea927e18_1109x1200.jpg");
+        Card card4 = new Card(1,"flowePower","Flower Power - National Geographic","https://www.nationalgeographic.com.es/medio/2019/09/19/flower-power_7da0a74e_1335x2000.jpg");
+        Card card5 = new Card(1,"montesFoja","Montes Foja - National Geographic","https://www.nationalgeographic.com.es/medio/2019/10/31/montesfoja61_497b4943_800x800.jpg");
+        getDb().cardDao().insertAll(card1,card2,card3,card4,card5);
+        UserCollection userCollection1 = new UserCollection(1,1);
+        UserCollection userCollection2 = new UserCollection(1,2);
+        UserCollection userCollection3 = new UserCollection(1,3);
+        UserCollection userCollection4 = new UserCollection(1,4);
+        UserCollection userCollection5 = new UserCollection(1,5);
+        getDb().userCollectionDao().insertAll(userCollection1,userCollection2,userCollection3,userCollection4,userCollection5);
+
+
         //TODO
         //Image Grid View Example
         final GridView gridview = findViewById(R.id.gridview);
 
         ImageAdapter imageAdapter = new ImageAdapter(this);
-
-        if(user.getMail().matches("")){
-            //List<Card> cards = getDb().userCollectionDao().getCardsForUser(user.getId());
-            //if(!cards.isEmpty()) cards.forEach(card -> imageAdapter.setItem(card.getLink()));
-            imageAdapter.setItem("https://www.nationalgeographic.com.es/medio/2019/09/19/across-the-sky-of-history_82c9fd85_800x533.jpg");
-            imageAdapter.setItem("https://www.nationalgeographic.com.es/medio/2019/09/19/the-watcher_4c5b7692_540x351.jpg");
-            imageAdapter.setItem("https://www.nationalgeographic.com.es/medio/2019/09/19/galactic-lighthouse_ea927e18_1109x1200.jpg");
-            imageAdapter.setItem("https://www.nationalgeographic.com.es/medio/2019/09/19/flower-power_7da0a74e_1335x2000.jpg");
-            imageAdapter.setItem("https://www.nationalgeographic.com.es/medio/2019/10/31/montesfoja61_497b4943_800x800.jpg");
-        }
+        
+         List<Card> cards = getDb().userCollectionDao().getCardsForUser(user.getId());
+         if(!cards.isEmpty()) cards.forEach(card -> imageAdapter.setItem(card.getLink()));
 
         gridview.setAdapter(imageAdapter);
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {

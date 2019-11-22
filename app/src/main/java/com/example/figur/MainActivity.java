@@ -22,6 +22,7 @@ import com.example.figur.ui.ImageAdapter;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final FloatingActionButton cameraButton = findViewById(R.id.btn_camera);
 
         String userMail = getIntent().getStringExtra("userMail");
 

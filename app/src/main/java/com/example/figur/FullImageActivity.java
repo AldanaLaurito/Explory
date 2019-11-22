@@ -8,11 +8,13 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.figur.R;
 import com.example.figur.ui.ImageAdapter;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 
 
 public class FullImageActivity extends Activity {
@@ -27,12 +29,20 @@ public class FullImageActivity extends Activity {
 
         Intent i = getIntent();
         int position = i.getExtras().getInt("id");
+        ArrayList<String> cardsAux = i.getStringArrayListExtra("userCards");
+
         ImageAdapter imageAdapter = new ImageAdapter(this);
 
-        img = findViewById(R.id.image);
-        String url = imageAdapter.getItem(position);
+        if(!cardsAux.isEmpty()) {
+            cardsAux.forEach(link -> imageAdapter.setItem(link));
 
-        new DownloadImage().execute(url);
+            img = findViewById(R.id.image);
+            String url = imageAdapter.getItem(position);
+
+            new DownloadImage().execute(url);
+        }else{
+            Toast.makeText(getApplicationContext(), "No cards found", Toast.LENGTH_SHORT).show();
+        }
     }
     private class DownloadImage extends AsyncTask<String, Void, Bitmap> {
 
@@ -54,5 +64,4 @@ public class FullImageActivity extends Activity {
             img.setImageBitmap(result);
         }
     }
-
 }

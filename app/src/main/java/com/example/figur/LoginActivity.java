@@ -105,8 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(mainActivity);
                     finish();
                 }else{
-                    setResult(Activity.RESULT_OK);
-                    finish();
+                    showLoginMessage("Login has failed.");
                 }
             }
         });
@@ -188,7 +187,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName() + "!";
+        String welcome = getString(R.string.welcome) + model.getDisplayName().substring(0,model.getDisplayName().indexOf("@")) + "!";
         // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }

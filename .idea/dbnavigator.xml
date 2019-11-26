@@ -23,7 +23,21 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="2b301f19-5b1a-41c2-81d8-6e3cafae1197">
+        <schema name="benchdb" object-types="view, table, index, dataset trigger, function, procedure, constraint, column" />
+        <schema name="empleados" object-types="view, table, function, procedure" />
+        <schema name="figur" object-types="view, table, function, procedure" />
+        <schema name="information_schema" object-types="view, table, function, procedure" />
+        <schema name="mysql" object-types="view, table, function, procedure" />
+        <schema name="performance_schema" object-types="view, table, function, procedure" />
+        <schema name="pp2ej1" object-types="view, table, function, procedure" />
+        <schema name="prueba" object-types="view, table, index, dataset trigger, function, procedure, constraint, column" />
+        <schema name="sakila" object-types="view, table, function, procedure" />
+        <schema name="springdata" object-types="view, table, function, procedure" />
+        <schema name="sys" object-types="view, table, function, procedure" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="2b301f19-5b1a-41c2-81d8-6e3cafae1197">
@@ -272,8 +286,6 @@
           <content-type name="HTML" enabled="true" />
           <content-type name="XHTML" enabled="true" />
           <content-type name="Java" enabled="true" />
-          <content-type name="SQL" enabled="true" />
-          <content-type name="PL/SQL" enabled="true" />
           <content-type name="Groovy" enabled="true" />
           <content-type name="AIDL" enabled="true" />
           <content-type name="YAML" enabled="true" />

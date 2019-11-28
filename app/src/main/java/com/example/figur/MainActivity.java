@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), FullImageActivity.class);
                 i.putExtra("id", position);
                 i.putStringArrayListExtra("userCards",cardsAux);
+                i.putExtra("userMail", userMail);
                 startActivity(i);
             }
         });
